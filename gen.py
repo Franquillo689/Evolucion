@@ -7,7 +7,7 @@ class DNA:
 	
 	def create_population(self):
 		self.population = ["" for i in range(self.n_indiviudals)]
-		print(population)
+		print(self.population)
 
 
 
@@ -18,7 +18,7 @@ def main():
 	target = "To be or not to be."
 	mutation_rate = 0.01
 	model = DNA(n_indiviudals = 400, target = target, mutation_rate = mutation_rate, verbose = False)
-	model.creat
+	model.create_population()
 
 
 if __name__ == '__main__':
