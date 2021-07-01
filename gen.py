@@ -39,19 +39,11 @@ class DNA:
 			for _ in range(len(self.target)):
 				self.population[i] += return_random_char()
 
-		print(self.population)
-
-
-		
-		
-
-
-
 
 
 
 def main():
-	target = "To be or not to be." # AI target
+	target = "To be or not be." # AI target
 	mutation_rate = 0.01 # Mutation rate
 	popmax = 10 # Max problation
 	# verbose is state when AI begins, when AI gets target verbose = True
