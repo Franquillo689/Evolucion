@@ -15,9 +15,10 @@ class DNA:
 
 
 def main():
-	target = "To be or not to be."
-	mutation_rate = 0.01
-	model = DNA(n_indiviudals = 400, target = target, mutation_rate = mutation_rate, verbose = False)
+	target = "To be or not to be." # AI target
+	mutation_rate = 0.01 # Mutation rate
+	popmax = 400 # Max problation
+	model = DNA(n_indiviudals = popmax, target = target, mutation_rate = mutation_rate, verbose = False)
 	model.create_population()
 
 
