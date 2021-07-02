@@ -30,6 +30,12 @@ class DNA:
 		self.target        = target
 		self.mutation_rate = mutation_rate
 		self.verbose       = verbose
+		self.generation    = 1
+
+	def finish(self):
+		# When target is catch then return True
+		# so the program finish. 
+		self.verbose = True
 	
 	def create_population(self):
 		# Create each dna pupulation
@@ -69,15 +75,13 @@ def main():
 					mutation_rate = mutation_rate,
 					verbose       = False
 				  )
-	model.create_population()
-	print(model.calculate_fitness())
-	print(target)
-	counter = 0
-	#print(model.population)
-	for i in model.calculate_fitness():
-		if i != 0:
-			print(model.population[counter])
-		counter += 1
+	model.create_population() # Create initial population
+
+def loop():
+	print("LOOP")
+
 
 if __name__ == '__main__':
 	main()
+	#while True:
+		#loop()
