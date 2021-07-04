@@ -147,7 +147,7 @@ if __name__ == '__main__':
 
 
 
-target = "Franco Mercado" # AI target
+target = "To be or not be." # AI target
 mutation_rate = 0.02 # Mutation rate
 popmax = 700 # Max problation
 # verbose is state when AI begins, when AI gets target verbose = True
