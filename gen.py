@@ -2,13 +2,13 @@ import numpy as np
 
 class DNA:
 	def __init__(self, n_indiviudals, target, mutation_rate):
-		self.n_indiviudals = n_indiviudals # Quantity 
-		self.target        = target        # ADN objetivo 
-		self.mutation_rate = mutation_rate # Probabilidad de mutacion
-		self.generation    = 1             # Numero de generacion
-		self.ind_size      = len(target)   # Cantidad de genes
-		self.fitness       = np.array([])  # Lista de fitness de la poblacion
-		self.population    = []            # Lista con adn de la poblacion
+		self.n_indiviudals = n_indiviudals # Individual amount
+		self.target        = target        # DNA target 
+		self.mutation_rate = mutation_rate # Mutation Rate
+		self.generation    = 1             # Generation number
+		self.ind_size      = len(target)   # Amount of genes
+		self.fitness       = np.array([])  # Fitness list of population
+		self.population    = []            # DNA list of each individual
 		self.verbose       = False		   # When True => program must finish
 		self.genetic_pool  = np.array([ 
 							  ' ', '!', '#', '$', '%', '&', '(', ')', 
@@ -47,8 +47,6 @@ class DNA:
 			fitness_list.append(fitness)
 		fitness_list = np.array(fitness_list)
 		fitness_list = fitness_list / fitness_list.sum()
-		#print("Fitness_list.sum(): ", fitness_list.sum())
-		#print(fitness_list)
 		self.fitness = fitness_list
 
 	def crossover(self):
@@ -77,6 +75,7 @@ class DNA:
 
 
 	def best_individual(self):
+		# Return best individual
 		fitness   = 0
 		max_index = 0
 		for i in range(self.n_indiviudals):
@@ -85,39 +84,21 @@ class DNA:
 				fitness   = self.fitness[i]
 
 		if self.population[max_index] == self.target:
+			# If best individual is equal
+			# to the target, then finish program.
 			self.verbose = True
 
 		return self.population[max_index]
 
 
-'''
-def main():
-	target = "To be or not be." # AI target
-	mutation_rate = 0.01 # Mutation rate
-	popmax = 100 # Max problation
-	# verbose is state when AI begins, when AI gets target verbose = True
-	model = DNA(
-					n_indiviudals = popmax, 
-					target        = target, 
-					mutation_rate = mutation_rate
-				  )
-	model.create_population() # Create initial population
-'''
 def loop():
 	model.calculate_fitness()
 	best_ind = model.best_individual()
-	print("Mejor individuo: ",best_ind)
+	print("Best individual: ",best_ind)
 	model.crossover()
 	model.mutation()
 
-'''
-if __name__ == '__main__':
-	main()
-	while True:
-		if model.verbose:
-			break
-		loop()
-'''
+
 
 
 
@@ -134,6 +115,6 @@ model.create_population() # Create initial population
 
 while True:
 	if model.verbose:
-		print("Numero de generaciones: ", model.generation)
+		print("Amount of generations: ", model.generation)
 		break
 	loop()
