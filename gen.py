@@ -1,41 +1,15 @@
 import numpy as np
-import matplotlib.pyplot as plt
-
-def return_random_char():
-	# Return a random character between:
-	# Space ! # $ % & ( ) * + - . 
-	# / 0 1 2 3 4 5 6 7 8 9 : ; < = > ?
-	# @ A B C D E F G H I J K L M N O P
-	# Q R S T U V W X Y Z [ ] ^ _ a
-	# b c d e f g h i j k l m n o p q r
-	# s t u v w x y z { | } ~
-
-	list = [' ', '!', '#', '$', '%', '&', '(', ')', 
-			'*', '+', ',', '-', '.', '/', '~', '|',
-	        '0', '1', '2', '3', '4', '5', '6', '7', 
-	        '8', '9', ':', ';', '<', '=', '>', '?', 
-	        '@', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 
-	        'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 
-	        'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 
-	        'X', 'Y', 'Z', '[', ']', '^', '_', 'a', 
-	        'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 
-	        'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 
-	        'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 
-	        'z', '{', '}'
-	        ]
-	return np.random.choice(list)
-	#return list[randint(0,len(list)-1)]
 
 class DNA:
 	def __init__(self, n_indiviudals, target, mutation_rate):
-		self.n_indiviudals = n_indiviudals # Cantidad de individuos
+		self.n_indiviudals = n_indiviudals # Quantity 
 		self.target        = target        # ADN objetivo 
 		self.mutation_rate = mutation_rate # Probabilidad de mutacion
 		self.generation    = 1             # Numero de generacion
 		self.ind_size      = len(target)   # Cantidad de genes
 		self.fitness       = np.array([])  # Lista de fitness de la poblacion
 		self.population    = []            # Lista con adn de la poblacion
-		self.verbose       = False
+		self.verbose       = False		   # When True => program must finish
 		self.genetic_pool  = np.array([ 
 							  ' ', '!', '#', '$', '%', '&', '(', ')', 
 							  '*', '+', ',', '-', '.', '/', '~', '|',
@@ -150,7 +124,6 @@ if __name__ == '__main__':
 target = "To be or not be." # AI target
 mutation_rate = 0.02 # Mutation rate
 popmax = 700 # Max problation
-# verbose is state when AI begins, when AI gets target verbose = True
 model = DNA(
 				n_indiviudals = popmax, 
 				target        = target, 
