@@ -1,4 +1,3 @@
-from random import randint
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -28,18 +27,15 @@ def return_random_char():
 	#return list[randint(0,len(list)-1)]
 
 class DNA:
-	def __init__(self, n_indiviudals, target, mutation_rate, verbose):
-		self.n_indiviudals = n_indiviudals
-		self.target        = target
-		self.mutation_rate = mutation_rate
-		self.verbose       = verbose
-		self.generation    = 1
+	def __init__(self, n_indiviudals, target, mutation_rate):
+		self.n_indiviudals = n_indiviudals # Cantidad de individuos
+		self.target        = target        # ADN objetivo 
+		self.mutation_rate = mutation_rate # Probabilidad de mutacion
+		self.generation    = 1             # Numero de generacion
+		self.ind_size      = len(target)   # Cantidad de genes
+		self.fitness       = np.array([])  # Lista de fitness de la poblacion
+		self.population    = []            # Lista con adn de la poblacion
 
-	def finish(self):
-		# When target is catch then return True
-		# so the program finish. 
-		self.verbose = True
-	
 	def create_population(self):
 		# Create each dna pupulation
 		self.population = [ "" for i in range(self.n_indiviudals) ]
@@ -57,15 +53,25 @@ class DNA:
 			counter = 0
 			for j in i:
 				if j == self.target[counter]:
-					fitness += 1 / len(self.target)
+					fitness += 1 / self.ind_size
 				counter += 1
 			fitness_list.append(fitness)
 		fitness_list = np.array(fitness_list)
 		fitness_list = fitness_list / fitness_list.sum()
-		print("Fitness_list.sum(): ", fitness_list.sum())
-		print(fitness_list)
-		#return fitness_list
+		#print("Fitness_list.sum(): ", fitness_list.sum())
+		#print(fitness_list)
+		self.fitness = fitness_list
 
+	def crossover(self):
+		# Do the reproduction of
+		# best genes.
+		offspring = []
+		for i in range(self.n_indiviudals//2):
+			parents     = np.random.choice(self.n_indiviudals, 2, p = self.fitness)
+			cross_point = np.random.randint(self.ind_size)
+			offspring  += [self.population[parents[0]][:cross_point] + self.population[parents[1]][cross_point:]]
+			offspring  += [self.population[parents[1]][:cross_point] + self.population[parents[0]][cross_point:]]
+		self.population = offspring
 
 
 
@@ -79,11 +85,11 @@ def main():
 	model = DNA(
 					n_indiviudals = popmax, 
 					target        = target, 
-					mutation_rate = mutation_rate,
-					verbose       = False
+					mutation_rate = mutation_rate
 				  )
 	model.create_population() # Create initial population
 	model.calculate_fitness()
+	model.crossover()
 
 def loop():
 	print("LOOP")
