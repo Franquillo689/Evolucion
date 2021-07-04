@@ -1,4 +1,6 @@
 from random import randint
+import numpy as np
+import matplotlib.pyplot as plt
 
 def return_random_char():
 	# Return a random character between:
@@ -10,7 +12,7 @@ def return_random_char():
 	# s t u v w x y z { | } ~
 
 	list = [' ', '!', '#', '$', '%', '&', '(', ')', 
-			  '*', '+', ',', '-', '.', '/', '~', '|',
+			'*', '+', ',', '-', '.', '/', '~', '|',
 	        '0', '1', '2', '3', '4', '5', '6', '7', 
 	        '8', '9', ':', ';', '<', '=', '>', '?', 
 	        '@', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 
@@ -22,7 +24,8 @@ def return_random_char():
 	        'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 
 	        'z', '{', '}'
 	        ]
-	return list[randint(0,len(list)-1)]
+	return np.random.choice(list)
+	#return list[randint(0,len(list)-1)]
 
 class DNA:
 	def __init__(self, n_indiviudals, target, mutation_rate, verbose):
@@ -57,7 +60,11 @@ class DNA:
 					fitness += 1 / len(self.target)
 				counter += 1
 			fitness_list.append(fitness)
-		return fitness_list
+		fitness_list = np.array(fitness_list)
+		fitness_list = fitness_list / fitness_list.sum()
+		print("Fitness_list.sum(): ", fitness_list.sum())
+		print(fitness_list)
+		#return fitness_list
 
 
 
@@ -76,6 +83,7 @@ def main():
 					verbose       = False
 				  )
 	model.create_population() # Create initial population
+	model.calculate_fitness()
 
 def loop():
 	print("LOOP")
