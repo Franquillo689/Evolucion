@@ -112,9 +112,9 @@ def loop():
 
 
 
-target = "Hello" # AI target
-mutation_rate = 0.02 # Mutation rate
-popmax = 100 # Max problation
+target = "To be or not be." # AI target
+mutation_rate = 0.01 # Mutation rate
+popmax = 1000 # Max problation
 model = DNA(
 				n_indiviudals = popmax, 
 				target        = target, 
